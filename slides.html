@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hook – Business Case</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f172a; color: #f8fafc; }
+    .slide {
+      width: 960px; height: 540px; margin: 24px auto; padding: 48px 56px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; border-radius: 8px; overflow: hidden;
+      page-break-after: always;
+    }
+    /* Slide themes */
+    .cover      { background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%); }
+    .section    { background: #1e293b; border-left: 6px solid #3b82f6; }
+    .content    { background: #1e293b; }
+    .highlight  { background: linear-gradient(135deg, #0f766e 0%, #1e40af 100%); }
+    .closing    { background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%); }
+
+    .label { font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+             color: #94a3b8; margin-bottom: 12px; }
+    h1 { font-size: 52px; font-weight: 800; line-height: 1.1; margin-bottom: 16px; }
+    h2 { font-size: 34px; font-weight: 700; margin-bottom: 24px; color: #f1f5f9; }
+    h3 { font-size: 20px; font-weight: 600; color: #7dd3fc; margin-bottom: 8px; }
+    p  { font-size: 17px; line-height: 1.7; color: #cbd5e1; max-width: 820px; }
+    .subtitle { font-size: 22px; color: #bfdbfe; margin-top: 8px; }
+    .tagline  { font-size: 18px; color: #94a3b8; margin-top: 24px; }
+
+    ul { list-style: none; margin-top: 8px; }
+    ul li { font-size: 16px; color: #cbd5e1; padding: 6px 0 6px 24px; position: relative; line-height: 1.5; }
+    ul li::before { content: "→"; position: absolute; left: 0; color: #3b82f6; font-weight: 700; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 8px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-top: 8px; }
+    .card {
+      background: rgba(255,255,255,0.07); border-radius: 8px;
+      padding: 20px 22px; border: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat { font-size: 40px; font-weight: 800; color: #38bdf8; }
+    .stat-label { font-size: 13px; color: #94a3b8; margin-top: 4px; }
+
+    .badge {
+      display: inline-block; background: rgba(59,130,246,0.2);
+      border: 1px solid #3b82f6; border-radius: 20px;
+      padding: 4px 14px; font-size: 13px; color: #93c5fd; margin: 4px 4px 4px 0;
+    }
+
+    .slide-number {
+      position: absolute; bottom: 18px; right: 28px;
+      font-size: 12px; color: #475569;
+    }
+    .logo {
+      position: absolute; top: 24px; right: 28px;
+      font-size: 22px; font-weight: 800;
+      background: linear-gradient(90deg, #60a5fa, #a78bfa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── Slide 1: Cover ── -->
+<div class="slide cover" data-slide="1" data-title="Cover">
+  <div class="label">Business Case</div>
+  <h1>Hook</h1>
+  <div class="subtitle">Real-time engagement intelligence for modern sales teams</div>
+  <div class="tagline">Confidential · 2026</div>
+  <div class="slide-number">1</div>
+</div>
+
+<!-- ── Slide 2: Executive Summary ── -->
+<div class="slide section" data-slide="2" data-title="Executive Summary">
+  <div class="logo">Hook</div>
+  <div class="label">Executive Summary</div>
+  <h2>The Opportunity in One Slide</h2>
+  <div class="grid-2" style="margin-top:16px;">
+    <div class="card">
+      <h3>The Problem</h3>
+      <p>Sales teams lose 30–40% of pipeline to disengaged buyers. They have no visibility into who is actually paying attention after a demo.</p>
+    </div>
+    <div class="card">
+      <h3>Our Solution</h3>
+      <p>Hook tracks post-meeting engagement signals—deck views, link clicks, champion shares—and surfaces the deals most likely to close, in real time.</p>
+    </div>
+    <div class="card">
+      <h3>The Ask</h3>
+      <p>$4M Seed round to hire GTM and engineering, reach 200 paying customers, and build toward a Series A.</p>
+    </div>
+    <div class="card">
+      <h3>Traction</h3>
+      <p>42 paying customers · $380K ARR · 3× net revenue retention · 9-month payback period</p>
+    </div>
+  </div>
+  <div class="slide-number">2</div>
+</div>
+
+<!-- ── Slide 3: Problem ── -->
+<div class="slide content" data-slide="3" data-title="The Problem">
+  <div class="logo">Hook</div>
+  <div class="label">The Problem</div>
+  <h2>Sales Reps Are Flying Blind</h2>
+  <div class="grid-2" style="margin-top:8px;">
+    <div>
+      <p style="margin-bottom:20px;">After the discovery call, the deal disappears into a black box. Reps have no idea:</p>
+      <ul>
+        <li>Whether the prospect reviewed the proposal</li>
+        <li>Which stakeholders are involved internally</li>
+        <li>If a competitor has entered the conversation</li>
+        <li>When urgency is dropping and the deal is at risk</li>
+      </ul>
+    </div>
+    <div>
+      <div class="card" style="margin-bottom:16px;">
+        <div class="stat">67%</div>
+        <div class="stat-label">of B2B deals stall or are lost after the demo (Gartner, 2025)</div>
+      </div>
+      <div class="card">
+        <div class="stat">$1.3T</div>
+        <div class="stat-label">in annual revenue lost globally to pipeline leakage</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-number">3</div>
+</div>
+
+<!-- ── Slide 4: Solution ── -->
+<div class="slide highlight" data-slide="4" data-title="Solution">
+  <div class="logo">Hook</div>
+  <div class="label">Solution</div>
+  <h2>Hook: Engagement Intelligence for Every Deal</h2>
+  <div class="grid-3" style="margin-top:16px;">
+    <div class="card">
+      <h3>📡 Signal Capture</h3>
+      <p>Tracks opens, time-on-page, re-shares, link clicks, and video drop-offs across all sales assets—automatically.</p>
+    </div>
+    <div class="card">
+      <h3>🧠 Deal Scoring</h3>
+      <p>Proprietary ML model scores each deal daily based on engagement velocity, stakeholder spread, and sentiment drift.</p>
+    </div>
+    <div class="card">
+      <h3>⚡ Rep Alerts</h3>
+      <p>Pushes real-time Slack/email nudges when a champion goes dark, a new viewer appears, or an at-risk deal re-engages.</p>
+    </div>
+  </div>
+  <p style="margin-top:20px; font-size:15px; color:#a5f3fc;">Integrates with Salesforce, HubSpot, Outreach, Gong, and Google Drive in under 10 minutes.</p>
+  <div class="slide-number">4</div>
+</div>
+
+<!-- ── Slide 5: Market Opportunity ── -->
+<div class="slide content" data-slide="5" data-title="Market Opportunity">
+  <div class="logo">Hook</div>
+  <div class="label">Market Opportunity</div>
+  <h2>Large and Underserved Market</h2>
+  <div class="grid-3" style="margin-top:16px;">
+    <div class="card">
+      <div class="stat">$18B</div>
+      <div class="stat-label">Total Addressable Market — Sales Intelligence & Enablement (2026)</div>
+    </div>
+    <div class="card">
+      <div class="stat">$4.2B</div>
+      <div class="stat-label">Serviceable Addressable Market — B2B SaaS sales teams, 10–5,000 seats</div>
+    </div>
+    <div class="card">
+      <div class="stat">$420M</div>
+      <div class="stat-label">Serviceable Obtainable Market — 3-year beachhead in tech, fintech, and SaaS verticals</div>
+    </div>
+  </div>
+  <ul style="margin-top:20px;">
+    <li>120,000+ B2B SaaS companies globally with active outbound sales motions</li>
+    <li>Average deal size: $18K ARR per customer; land-and-expand to $54K within 18 months</li>
+    <li>Category is nascent—no dominant player owns post-demo engagement intelligence</li>
+  </ul>
+  <div class="slide-number">5</div>
+</div>
+
+<!-- ── Slide 6: Product ── -->
+<div class="slide section" data-slide="6" data-title="Product">
+  <div class="logo">Hook</div>
+  <div class="label">Product</div>
+  <h2>Built for the Modern Sales Stack</h2>
+  <div class="grid-2" style="margin-top:12px;">
+    <div>
+      <h3>Core Features (GA)</h3>
+      <ul>
+        <li>Asset tracking — decks, PDFs, links, videos</li>
+        <li>Stakeholder map — auto-detected from email threads</li>
+        <li>Deal health score — updated in real time</li>
+        <li>CRM sync — bi-directional with SFDC & HubSpot</li>
+        <li>Rep dashboard + manager roll-up</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Roadmap (H2 2026)</h3>
+      <ul>
+        <li>AI-generated follow-up email drafts</li>
+        <li>Mutual action plan co-editing with buyers</li>
+        <li>Conversation intelligence integration (Gong, Chorus)</li>
+        <li>Multi-thread risk detection</li>
+        <li>Revenue forecasting module</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-number">6</div>
+</div>
+
+<!-- ── Slide 7: Traction ── -->
+<div class="slide highlight" data-slide="7" data-title="Traction">
+  <div class="logo">Hook</div>
+  <div class="label">Traction</div>
+  <h2>Early Proof Points</h2>
+  <div class="grid-3" style="margin-top:16px;">
+    <div class="card">
+      <div class="stat">42</div>
+      <div class="stat-label">Paying customers (12 months post-launch)</div>
+    </div>
+    <div class="card">
+      <div class="stat">$380K</div>
+      <div class="stat-label">Annual Recurring Revenue</div>
+    </div>
+    <div class="card">
+      <div class="stat">3×</div>
+      <div class="stat-label">Net Revenue Retention (NRR)</div>
+    </div>
+    <div class="card">
+      <div class="stat">9mo</div>
+      <div class="stat-label">Average payback period</div>
+    </div>
+    <div class="card">
+      <div class="stat">92%</div>
+      <div class="stat-label">12-month gross retention</div>
+    </div>
+    <div class="card">
+      <div class="stat">4.8★</div>
+      <div class="stat-label">G2 score (38 reviews)</div>
+    </div>
+  </div>
+  <div class="slide-number">7</div>
+</div>
+
+<!-- ── Slide 8: Business Model ── -->
+<div class="slide content" data-slide="8" data-title="Business Model">
+  <div class="logo">Hook</div>
+  <div class="label">Business Model</div>
+  <h2>Simple, Scalable SaaS Pricing</h2>
+  <div class="grid-3" style="margin-top:16px;">
+    <div class="card">
+      <h3>Starter</h3>
+      <p style="font-size:28px; font-weight:700; color:#38bdf8; margin:8px 0;">$49<span style="font-size:15px; color:#94a3b8;">/seat/mo</span></p>
+      <ul>
+        <li>Up to 10 seats</li>
+        <li>Core tracking</li>
+        <li>CRM sync</li>
+        <li>Email alerts</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:#3b82f6;">
+      <h3>Growth <span class="badge">Most Popular</span></h3>
+      <p style="font-size:28px; font-weight:700; color:#38bdf8; margin:8px 0;">$89<span style="font-size:15px; color:#94a3b8;">/seat/mo</span></p>
+      <ul>
+        <li>Unlimited seats</li>
+        <li>AI deal scoring</li>
+        <li>Slack integration</li>
+        <li>Manager analytics</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Enterprise</h3>
+      <p style="font-size:28px; font-weight:700; color:#38bdf8; margin:8px 0;">Custom</p>
+      <ul>
+        <li>SSO / SCIM</li>
+        <li>Custom integrations</li>
+        <li>Dedicated CSM</li>
+        <li>SLA guarantee</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-number">8</div>
+</div>
+
+<!-- ── Slide 9: Competition ── -->
+<div class="slide section" data-slide="9" data-title="Competitive Landscape">
+  <div class="logo">Hook</div>
+  <div class="label">Competitive Landscape</div>
+  <h2>Why Hook Wins</h2>
+  <div class="grid-2" style="margin-top:12px;">
+    <div>
+      <p style="margin-bottom:16px;">Existing tools solve adjacent problems but miss the post-demo engagement layer:</p>
+      <ul>
+        <li><strong style="color:#f8fafc;">Gong / Chorus</strong> — call intelligence, not async engagement</li>
+        <li><strong style="color:#f8fafc;">Outreach / Salesloft</strong> — sequencing, not deal intelligence</li>
+        <li><strong style="color:#f8fafc;">Clari / Boostup</strong> — forecasting, not buyer-side signals</li>
+        <li><strong style="color:#f8fafc;">Highspot / Seismic</strong> — content management, not engagement scoring</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Hook's Moat</h3>
+      <ul>
+        <li>Buyer-side data network effect — more customers = smarter benchmarks</li>
+        <li>Deep async signal capture (no browser extension required)</li>
+        <li>Proprietary engagement-to-close correlation dataset</li>
+        <li>Fastest integration in category — live in &lt;10 min</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-number">9</div>
+</div>
+
+<!-- ── Slide 10: Financial Projections ── -->
+<div class="slide content" data-slide="10" data-title="Financial Projections">
+  <div class="logo">Hook</div>
+  <div class="label">Financial Projections</div>
+  <h2>Path to $10M ARR by Year 3</h2>
+  <div class="grid-3" style="margin-top:16px;">
+    <div class="card">
+      <h3>Year 1 (2026)</h3>
+      <div class="stat" style="font-size:30px;">$1.2M</div>
+      <div class="stat-label">ARR</div>
+      <ul style="margin-top:12px;">
+        <li>120 customers</li>
+        <li>Hire 8 FTEs</li>
+        <li>US market focus</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Year 2 (2027)</h3>
+      <div class="stat" style="font-size:30px;">$4.5M</div>
+      <div class="stat-label">ARR</div>
+      <ul style="margin-top:12px;">
+        <li>400 customers</li>
+        <li>Launch EU expansion</li>
+        <li>Series A raise</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Year 3 (2028)</h3>
+      <div class="stat" style="font-size:30px;">$10.8M</div>
+      <div class="stat-label">ARR</div>
+      <ul style="margin-top:12px;">
+        <li>800 customers</li>
+        <li>Cash-flow positive</li>
+        <li>Enterprise motion live</li>
+      </ul>
+    </div>
+  </div>
+  <p style="margin-top:16px; font-size:14px; color:#64748b;">Assumptions: $18K avg new ARR, 3× NRR maintained, 80% gross margin. Based on bottom-up sales capacity model.</p>
+  <div class="slide-number">10</div>
+</div>
+
+<!-- ── Slide 11: Team ── -->
+<div class="slide section" data-slide="11" data-title="Team">
+  <div class="logo">Hook</div>
+  <div class="label">Team</div>
+  <h2>Built by Operators Who've Lived the Problem</h2>
+  <div class="grid-3" style="margin-top:16px;">
+    <div class="card">
+      <h3>Alex Rivera</h3>
+      <div style="font-size:13px; color:#94a3b8; margin-bottom:8px;">Co-Founder & CEO</div>
+      <p style="font-size:14px;">Former VP Sales @ Segment (acq. Twilio $3.2B). Led 80-person revenue org. Felt this pain daily.</p>
+    </div>
+    <div class="card">
+      <h3>Priya Nair</h3>
+      <div style="font-size:13px; color:#94a3b8; margin-bottom:8px;">Co-Founder & CTO</div>
+      <p style="font-size:14px;">Ex-Staff Engineer @ Palantir. Built real-time data pipelines at petabyte scale. 3 ML patents.</p>
+    </div>
+    <div class="card">
+      <h3>Jordan Kim</h3>
+      <div style="font-size:13px; color:#94a3b8; margin-bottom:8px;">VP Product</div>
+      <p style="font-size:14px;">Former PM Lead @ Gong. Shipped core call analytics product from 0 → $100M ARR milestone.</p>
+    </div>
+  </div>
+  <div style="margin-top:16px;">
+    <span class="badge">Advised by: ex-Salesforce CPO</span>
+    <span class="badge">ex-HubSpot VP Eng</span>
+    <span class="badge">Partner @ Bessemer Venture Partners</span>
+  </div>
+  <div class="slide-number">11</div>
+</div>
+
+<!-- ── Slide 12: Use of Funds ── -->
+<div class="slide content" data-slide="12" data-title="Use of Funds">
+  <div class="logo">Hook</div>
+  <div class="label">Use of Funds — $4M Seed</div>
+  <h2>Deploying Capital to Reach Series A Milestones</h2>
+  <div class="grid-2" style="margin-top:16px;">
+    <div>
+      <ul>
+        <li><strong style="color:#f8fafc;">Engineering (45%  ·  $1.8M)</strong> — 4 senior engineers, infra scaling, security/compliance</li>
+        <li><strong style="color:#f8fafc;">Sales & Marketing (35%  ·  $1.4M)</strong> — 3 AEs, 1 SDR, demand gen, events</li>
+        <li><strong style="color:#f8fafc;">Customer Success (12%  ·  $480K)</strong> — 2 CSMs to protect and expand NRR</li>
+        <li><strong style="color:#f8fafc;">G&amp;A / Legal (8%  ·  $320K)</strong> — ops, finance, IP protection</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>18-Month Milestones</h3>
+      <ul>
+        <li>200 paying customers</li>
+        <li>$2M ARR run-rate</li>
+        <li>SOC 2 Type II certified</li>
+        <li>Series A raise at $20M+ ARR-multiple valuation</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-number">12</div>
+</div>
+
+<!-- ── Slide 13: The Ask ── -->
+<div class="slide closing" data-slide="13" data-title="The Ask">
+  <div class="label">The Ask</div>
+  <h1 style="font-size:44px;">Join Us in Defining How Deals Get Won</h1>
+  <div class="grid-3" style="margin-top:28px;">
+    <div class="card" style="background:rgba(0,0,0,0.2); border-color:rgba(255,255,255,0.2);">
+      <div class="stat">$4M</div>
+      <div class="stat-label">Seed Round</div>
+    </div>
+    <div class="card" style="background:rgba(0,0,0,0.2); border-color:rgba(255,255,255,0.2);">
+      <div class="stat">18mo</div>
+      <div class="stat-label">Runway to Series A</div>
+    </div>
+    <div class="card" style="background:rgba(0,0,0,0.2); border-color:rgba(255,255,255,0.2);">
+      <div class="stat">$2M</div>
+      <div class="stat-label">Remaining capacity</div>
+    </div>
+  </div>
+  <p style="margin-top:28px; font-size:16px; color:#e0e7ff;">contact@hook.ai  ·  hook.ai  ·  Deck & data room available on request</p>
+  <div class="slide-number">13</div>
+</div>
+
+</body>
+</html>
