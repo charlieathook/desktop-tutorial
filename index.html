@@ -48,15 +48,34 @@
     }
 
     .logo { display: flex; align-items: center; gap: .75rem; }
-    .logo-mark {
-      width: 38px; height: 38px;
-      background: var(--accent);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; font-weight: 800; color: #fff;
-    }
     .logo h1 { font-size: 1.4rem; font-weight: 700; letter-spacing: -.02em; }
-    .logo span { color: var(--muted); font-weight: 400; }
+
+    .header-right { display: flex; align-items: center; gap: 1rem; }
+
+    .hook-logo svg { display: block; }
+
+    /* ── Quote watermark ── */
+    .quote-watermark {
+      text-align: center;
+      padding: 1.1rem 1.25rem .25rem;
+      font-size: .78rem;
+      font-style: italic;
+      color: rgba(136,144,166,.28);
+      letter-spacing: .01em;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* ── Blob guy ── */
+    .blob-guy {
+      position: fixed;
+      bottom: 90px;
+      right: 24px;
+      width: 72px;
+      opacity: .55;
+      pointer-events: none;
+      z-index: 0;
+    }
 
     .api-btn {
       background: var(--surface);
@@ -447,19 +466,53 @@
   <div class="home-wrap">
     <header>
       <div class="logo">
-        <div class="logo-mark">Ai</div>
         <h1>Ai4AEbyCT</h1>
       </div>
-      <button class="api-btn" id="api-key-btn" onclick="openApiModal()">
-        <span id="key-icon">🔑</span>
-        <span id="key-label">Set API Key</span>
-      </button>
+      <div class="header-right">
+        <button class="api-btn" id="api-key-btn" onclick="openApiModal()">
+          <span id="key-icon">🔑</span>
+          <span id="key-label">Set API Key</span>
+        </button>
+        <div class="hook-logo">
+          <!-- Hook logo: blob with X -->
+          <svg width="38" height="38" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 4 C62 4 72 10 76 20 C86 20 96 30 96 50 C96 70 86 80 76 80 C72 90 62 96 50 96 C38 96 28 90 24 80 C14 80 4 70 4 50 C4 30 14 20 24 20 C28 10 38 4 50 4 Z" fill="#111111"/>
+            <line x1="31" y1="31" x2="69" y2="69" stroke="white" stroke-width="13" stroke-linecap="round"/>
+            <line x1="69" y1="31" x2="31" y2="69" stroke="white" stroke-width="13" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
     </header>
+
+    <p class="quote-watermark">"i f*cking hate demo monkey" — Sophie Cornish, circa 2025</p>
 
     <p class="subtitle">Your AI projects, all in one place. Click any tool to start a conversation.</p>
 
     <div class="grid" id="project-grid"></div>
   </div>
+</div>
+
+<!-- Blob guy -->
+<div class="blob-guy">
+  <svg viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="blobBody" cx="45%" cy="40%" r="60%">
+        <stop offset="0%" stop-color="#e8899a"/>
+        <stop offset="55%" stop-color="#c4637a"/>
+        <stop offset="100%" stop-color="#7a3d5a"/>
+      </radialGradient>
+      <radialGradient id="blobBottom" cx="50%" cy="20%" r="70%">
+        <stop offset="0%" stop-color="#9a5570"/>
+        <stop offset="100%" stop-color="#5c2e48"/>
+      </radialGradient>
+    </defs>
+    <!-- Body -->
+    <ellipse cx="60" cy="140" rx="52" ry="18" fill="url(#blobBottom)" opacity=".6"/>
+    <path d="M18 90 C14 70 14 50 20 36 C28 18 40 10 60 10 C80 10 92 18 100 36 C106 50 106 70 102 90 C100 108 90 128 60 140 C30 128 20 108 18 90 Z" fill="url(#blobBody)"/>
+    <!-- Eyes -->
+    <ellipse cx="44" cy="68" rx="7" ry="8.5" fill="#2a1520"/>
+    <ellipse cx="76" cy="68" rx="7" ry="8.5" fill="#2a1520"/>
+  </svg>
 </div>
 
 <!-- ══════════════════════════════
