@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Portfolio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --accent: #6c63ff;
+      --accent-soft: #3d3880;
+      --text: #e8eaf0;
+      --muted: #8890a6;
+      --green: #3ecf8e;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --blue: #3b82f6;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0 1rem 4rem;
+    }
+
+    /* ── Header ── */
+    header {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 0 2rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-left h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .header-left h1 span { color: var(--accent); }
+
+    .header-left p {
+      color: var(--muted);
+      margin-top: .4rem;
+      font-size: .95rem;
+    }
+
+    .header-meta {
+      font-size: .85rem;
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .header-meta strong { color: var(--text); }
+
+    /* ── Controls ── */
+    .controls {
+      max-width: 1100px;
+      margin: 1.8rem auto .5rem;
+      display: flex;
+      gap: .75rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .search {
+      flex: 1;
+      min-width: 200px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .55rem 1rem;
+      color: var(--text);
+      font-size: .9rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .search:focus { border-color: var(--accent); }
+    .search::placeholder { color: var(--muted); }
+
+    .filter-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .5rem 1rem;
+      color: var(--muted);
+      font-size: .85rem;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--accent);
+      color: var(--text);
+      background: var(--accent-soft);
+    }
+
+    /* ── Grid ── */
+    .grid {
+      max-width: 1100px;
+      margin: 1.5rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .9rem;
+      transition: border-color .2s, transform .15s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+
+    .card-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .status-badge {
+      font-size: .72rem;
+      font-weight: 600;
+      padding: .25rem .65rem;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      flex-shrink: 0;
+    }
+
+    .status-active    { background: rgba(62,207,142,.15); color: var(--green); }
+    .status-planning  { background: rgba(245,158,11,.15); color: var(--yellow); }
+    .status-archived  { background: rgba(136,144,166,.12); color: var(--muted); }
+    .status-paused    { background: rgba(239,68,68,.12); color: var(--red); }
+
+    .card h2 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .card p {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .tag {
+      background: rgba(108,99,255,.12);
+      color: #9d97ff;
+      border-radius: 6px;
+      padding: .2rem .6rem;
+      font-size: .75rem;
+      font-weight: 500;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: .6rem;
+      border-top: 1px solid var(--border);
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    .card-footer a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .card-footer a:hover { text-decoration: underline; }
+
+    .avatars {
+      display: flex;
+      gap: -4px;
+    }
+
+    .avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .6rem;
+      font-weight: 700;
+      border: 2px solid var(--surface);
+      margin-left: -6px;
+      first-child { margin-left: 0; }
+    }
+
+    /* ── Empty state ── */
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--muted);
+    }
+
+    .empty p { margin-top: .5rem; font-size: .9rem; }
+
+    /* ── Stats bar ── */
+    .stats {
+      max-width: 1100px;
+      margin: 1rem auto 0;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .stat strong { color: var(--text); }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>Project <span>Portfolio</span></h1>
+    <p>All active and upcoming team projects in one place.</p>
+  </div>
+  <div class="header-meta">
+    Last updated <strong id="last-updated"></strong>
+  </div>
+</header>
+
+<div class="controls">
+  <input class="search" type="text" id="search" placeholder="Search projects..." />
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="active">Active</button>
+  <button class="filter-btn" data-filter="planning">Planning</button>
+  <button class="filter-btn" data-filter="paused">Paused</button>
+  <button class="filter-btn" data-filter="archived">Archived</button>
+</div>
+
+<div class="stats">
+  <span class="stat"><strong id="stat-total">0</strong> total</span>
+  <span class="stat" style="color:var(--green)"><strong id="stat-active">0</strong> active</span>
+  <span class="stat" style="color:var(--yellow)"><strong id="stat-planning">0</strong> planning</span>
+  <span class="stat" style="color:var(--muted)"><strong id="stat-archived">0</strong> archived</span>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script>
+  // ─────────────────────────────────────────────
+  //  EDIT YOUR PROJECTS HERE
+  // ─────────────────────────────────────────────
+  const PROJECTS = [
+    {
+      icon: "🚀",
+      name: "Project Alpha",
+      description: "Core platform overhaul — migrating the monolith to a microservices architecture for improved scalability and independent deployments.",
+      status: "active",         // active | planning | paused | archived
+      tags: ["Backend", "Go", "Kubernetes"],
+      owner: "You",
+      link: "#",               // set to repo / doc URL or remove
+      linkLabel: "View Repo",
+      team: ["AJ", "SK", "MR"],
+      teamColors: ["#6c63ff", "#3ecf8e", "#f59e0b"],
+      updated: "Today",
+    },
+    {
+      icon: "🎨",
+      name: "Design System v2",
+      description: "Unified component library and token system to ensure visual consistency across all products. Includes Figma + code.",
+      status: "active",
+      tags: ["Frontend", "React", "Figma"],
+      owner: "You",
+      link: "#",
+      linkLabel: "View Docs",
+      team: ["LT", "AJ"],
+      teamColors: ["#ef4444", "#6c63ff"],
+      updated: "2 days ago",
+    },
+    {
+      icon: "📊",
+      name: "Analytics Dashboard",
+      description: "Real-time business metrics dashboard. Tracks key KPIs, funnel conversion, and cohort retention for the growth team.",
+      status: "planning",
+      tags: ["Data", "Python", "React"],
+      owner: "You",
+      link: "#",
+      linkLabel: "View Brief",
+      team: ["SK", "NB"],
+      teamColors: ["#3ecf8e", "#3b82f6"],
+      updated: "1 week ago",
+    },
+    {
+      icon: "🔐",
+      name: "Auth Service",
+      description: "Standalone authentication microservice supporting OAuth 2.0, SSO, and MFA. To be consumed by all internal products.",
+      status: "active",
+      tags: ["Security", "Node.js", "PostgreSQL"],
+      owner: "You",
+      link: "#",
+      linkLabel: "View Repo",
+      team: ["MR", "AJ", "SK"],
+      teamColors: ["#f59e0b", "#6c63ff", "#3ecf8e"],
+      updated: "3 days ago",
+    },
+    {
+      icon: "📱",
+      name: "Mobile App",
+      description: "Companion mobile app for iOS and Android. Brings core product features to mobile with offline-first support.",
+      status: "planning",
+      tags: ["React Native", "iOS", "Android"],
+      owner: "You",
+      link: "#",
+      linkLabel: "View Spec",
+      team: ["LT"],
+      teamColors: ["#ef4444"],
+      updated: "5 days ago",
+    },
+    {
+      icon: "🗃️",
+      name: "Legacy CMS",
+      description: "Internal content management system built in 2019. Kept in maintenance mode — no new features, security patches only.",
+      status: "archived",
+      tags: ["PHP", "MySQL"],
+      owner: "You",
+      link: "#",
+      linkLabel: "View Repo",
+      team: ["NB"],
+      teamColors: ["#3b82f6"],
+      updated: "3 months ago",
+    },
+  ];
+  // ─────────────────────────────────────────────
+
+  const COLORS = ["#6c63ff","#3ecf8e","#f59e0b","#ef4444","#3b82f6","#ec4899"];
+
+  function initials(name) {
+    return name.split(" ").map(w => w[0]).join("").toUpperCase().slice(0,2);
+  }
+
+  function renderCard(p) {
+    const teamHtml = (p.team || []).map((name, i) => {
+      const color = (p.teamColors || [])[i] || COLORS[i % COLORS.length];
+      return `<div class="avatar" style="background:${color}22;color:${color}" title="${name}">${initials(name)}</div>`;
+    }).join("");
+
+    const linkHtml = p.link
+      ? `<a href="${p.link}" target="_blank" rel="noopener">${p.linkLabel || "Open"} →</a>`
+      : `<span>${p.updated}</span>`;
+
+    return `
+      <div class="card" data-status="${p.status}" data-name="${p.name.toLowerCase()}" data-tags="${p.tags.join(" ").toLowerCase()}">
+        <div class="card-top">
+          <span class="card-icon">${p.icon}</span>
+          <span class="status-badge status-${p.status}">${p.status}</span>
+        </div>
+        <h2>${p.name}</h2>
+        <p>${p.description}</p>
+        <div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
+        <div class="card-footer">
+          <div class="avatars">${teamHtml}</div>
+          ${linkHtml}
+        </div>
+      </div>`;
+  }
+
+  function render(filter = "all", query = "") {
+    const grid = document.getElementById("grid");
+    const q = query.trim().toLowerCase();
+
+    const filtered = PROJECTS.filter(p => {
+      const matchFilter = filter === "all" || p.status === filter;
+      const matchQuery = !q || p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q) || p.tags.some(t => t.toLowerCase().includes(q));
+      return matchFilter && matchQuery;
+    });
+
+    if (filtered.length === 0) {
+      grid.innerHTML = `<div class="empty"><h3>No projects found</h3><p>Try a different search or filter.</p></div>`;
+    } else {
+      grid.innerHTML = filtered.map(renderCard).join("");
+    }
+  }
+
+  function updateStats() {
+    document.getElementById("stat-total").textContent = PROJECTS.length;
+    document.getElementById("stat-active").textContent = PROJECTS.filter(p => p.status === "active").length;
+    document.getElementById("stat-planning").textContent = PROJECTS.filter(p => p.status === "planning").length;
+    document.getElementById("stat-archived").textContent = PROJECTS.filter(p => p.status === "archived").length;
+  }
+
+  // Controls
+  let currentFilter = "all";
+
+  document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentFilter = btn.dataset.filter;
+      render(currentFilter, document.getElementById("search").value);
+    });
+  });
+
+  document.getElementById("search").addEventListener("input", e => {
+    render(currentFilter, e.target.value);
+  });
+
+  // Last updated date
+  document.getElementById("last-updated").textContent = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+
+  updateStats();
+  render();
+</script>
+</body>
+</html>
