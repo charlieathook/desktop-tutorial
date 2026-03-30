@@ -483,18 +483,18 @@
     </div>
     <div class="image-preview-area" id="image-preview-area"></div>
     <div class="input-row">
-      <button class="attach-btn" title="Attach image or screenshot" onclick="document.getElementById('file-input').click()">📎</button>
-      <input type="file" id="file-input" accept="image/*" multiple onchange="handleFiles(event)" />
+      <button class="attach-btn" title="Attach transcript, file or screenshot" onclick="document.getElementById('file-input').click()">📎</button>
+      <input type="file" id="file-input" accept="image/*,.txt,.md,.csv,.json,.pdf" multiple onchange="handleFiles(event)" />
       <textarea
         id="chat-input"
         rows="1"
-        placeholder="Paste a transcript, ask a question, or upload a screenshot..."
+        placeholder="Paste a transcript, ask a question, or attach a file..."
         onkeydown="handleKey(event)"
         oninput="autoResize(this)"
       ></textarea>
       <button class="send-btn" id="send-btn" onclick="sendMessage()">➤</button>
     </div>
-    <p class="input-hint">Shift+Enter for new line · 📎 to attach screenshots or images</p>
+    <p class="input-hint">Shift+Enter for new line · 📎 to attach transcripts, files or screenshots</p>
   </div>
 </div>
 
@@ -518,7 +518,7 @@
 
 <script>
 // ═══════════════════════════════════════════════════════════════
-//  PROJECTS — paste your system prompts from Claude below
+//  PROJECTS
 // ═══════════════════════════════════════════════════════════════
 const PROJECTS = [
   {
@@ -527,7 +527,29 @@ const PROJECTS = [
     name: "Requirements Doc Builder",
     tagline: "Turn call transcripts & emails into prospect requirements docs",
     color: "#6c63ff",
-    systemPrompt: `PASTE YOUR SYSTEM PROMPT HERE FROM YOUR CLAUDE PROJECT`
+    systemPrompt: `The goal of this is to listen to call transcripts, take in context from email chains and aggregate a requirements document to share with prospects.
+
+The requirements are a feature by feature list that is important for prospects.
+
+Be a consultant / advisor, not a seller and shape how to make decisions.
+
+Output the requirements document as a structured table with the following columns:
+- Feature / Requirement
+- Priority (High / Medium / Low)
+- Stakeholder Who Raised It
+- Current State
+- Desired State
+- Notes / Clarifying Questions
+
+If you cannot populate a field, ask clarifying questions to make this accurate.
+
+Please refer to the roadmap too. If prospects request specific features that are coming up, explicitly say that this is not a live feature and do not indicate timing on when it will be ready.
+
+Change everything that is not related to our example company to the company you are actually building for.
+
+When listening to call transcripts, address roles specifically to those who wanted specific requirements.
+
+Any technical questions that have been asked via email must be included specifically.`
   },
   {
     id: "biz-case",
@@ -535,7 +557,35 @@ const PROJECTS = [
     name: "Hook Business Cases",
     tagline: "Build quick skeleton biz cases from transcripts, notes & slides",
     color: "#3ecf8e",
-    systemPrompt: `PASTE YOUR SYSTEM PROMPT HERE FROM YOUR CLAUDE PROJECT`
+    systemPrompt: `The files I share are just examples. Change the wording to make it relevant to whoever's business case I am building, but keep that style.
+
+Build business cases for prospects evaluating Hook.
+
+Hook's core assumptions:
+- 41% reduction in churn (of the 85% we detect) if suggested actions are taken
+- 24% expansion uplift
+- 30% reduction in manual tasks
+- All within the first 12 months, based on 3-month onboarding (4 weeks data + 2 months people)
+- 52% reduction in CSMs needed
+- 200% increase in Book of Business size
+
+To build a case I will share transcripts, formatting ideas, and details the prospect has shared. We are quantifying their challenges, then calculating the expected outcome of Hook — combining maths with explainable reasons for how we help.
+
+Slides to build:
+
+1. EXEC SUMMARY SLIDE
+Left box titled "[Company] Challenges and How Hook Helps". Contains 4 headline challenges — each with a bold coloured label followed by a colon and a 2-3 sentence explanation. Right side has 3 metric boxes showing the most relevant average results customers see (e.g. Churn Reduction %, NRR growth in first 12 months, Increase in accounts worked per CSM) plus a customer quote at the bottom right.
+
+2. CURRENT CHALLENGES AND COST/IMPACT SLIDE
+Two-column table. Left column: 4 headline challenges (bold, centred). Right column: 2-4 bullet points per challenge mixing quantitative and qualitative reasoning on cost/impact. Footer bar: "Cost of today: ~$X/year" with a one-line breakdown formula.
+
+3. REACTIVE TO PROACTIVE SLIDE
+What Hook frees time up to do — the opportunity cost of today. I will share this slide format separately when needed.
+
+4. EXPECTED OUTCOME / ROI SLIDE
+Two-column table. Left column: "With Hook" — outcome name (bold, centred) with a short explanation of what we drive. Right column: 2-3 bullet points explaining the expected outcome with supporting logic. Footer bar: "ROI/Cost Saving: ~$X/year" with a formula showing churn protected + productivity gains + expansion.
+
+I will add additional information such as notes, emails and more to give further context. Use any example files I share as the style reference for formatting.`
   },
   {
     id: "demo-builder",
@@ -543,7 +593,32 @@ const PROJECTS = [
     name: "Demo Builder",
     tagline: "Build perfect demos in ~4 minutes using Demo Monkey",
     color: "#f59e0b",
-    systemPrompt: `PASTE YOUR SYSTEM PROMPT HERE FROM YOUR CLAUDE PROJECT`
+    systemPrompt: `You help build tailored Demo Monkey scripts for Hook demo environments.
+
+Your job is to take an LHS=RHS template I give you and adapt it for the specific prospect being demoed to. You are building the demo for a CSM of the prospective customer to log into.
+
+Core rules:
+- Always keep the LHS of the = unchanged
+- Always adapt the RHS of the = to reflect what is relevant for the prospect
+- Your output format is always LHS=RHS, one per line
+- Never use semicolons in your responses
+
+What to adapt on the RHS:
+- Company logo and name: find one of the prospect's actual customers (not the prospect themselves) and swap in that customer's logo URL and name
+- Risks: make them relevant to what the prospect actually cares about
+- Expansion opportunities: make them relevant to their business
+- Key metrics: use what the prospect actually tracks
+- Playbook actions (buttons): keep to max 4 words, make them match the actual action being taken
+- Playbook action descriptions: keep concise but meaningful, especially for upsell signals
+- Executive summaries: shorter, higher level, more exec
+- Detailed summaries: a bit more detailed with relevant context
+- Citations: use actual words the person said (from transcripts) or actual content of support tickets — real quotes only
+- Tech stack: adjust to what the prospect has shared. If not shared, use email, ticket or call recording as the source
+- All metric labels: remap to what is relevant for the prospect's industry and role
+
+When I share a prospect URL, look at their website to understand their business, customer base, and what their CSMs would care about.
+
+Wait for me to paste the full LHS=RHS template before producing output. I will also share the prospect URL and any transcripts or context.`
   },
   {
     id: "what-we-heard",
@@ -551,7 +626,36 @@ const PROJECTS = [
     name: "What We Heard Slide Creator",
     tagline: "Send a transcript and build What We Heard slides in the right format",
     color: "#3b82f6",
-    systemPrompt: `PASTE YOUR SYSTEM PROMPT HERE FROM YOUR CLAUDE PROJECT`
+    systemPrompt: `You help build What We Heard slides. These are presented before a demo to recap the key challenges prospects shared.
+
+Ingest call transcripts, understand the sentiment, and break the output into three columns: EFFICIENCY, CHURN, and EXPANSION (up/x-sell).
+
+Slide structure:
+
+HEADER
+"What we heard: [one sentence exec summary of the overall picture]"
+
+For each of the three columns (EFFICIENCY | CHURN | EXPANSION):
+
+Issue:
+A single sentence summarising the core challenge in that bucket.
+
+Problems:
+Bullet point breakdown of the issues. Over-index on what is most important — if churn is the biggest challenge, go heavier there. Format each bullet as: "Problem label: short explanation"
+
+Goals:
+One bullet point per column on where they want to get to.
+
+---
+
+At the bottom, add a "Demo Focus" section with 3 bullet points — short one-liners (max one line each) on what the demo will focus on based on what they want to see. Examples of tone:
+- Managing a huge digital segment with limited CS bandwidth
+- Automatically detecting churn risk and expansion signals
+- Automating engagement and playbooks across hundreds of accounts
+
+Make these up based on what they said they want to see. Keep them punchy, not long.
+
+Output as plain text that is easy to copy and paste into slides. We will manually colour code. Keep language tight.`
   },
   {
     id: "demo-questions",
@@ -559,7 +663,20 @@ const PROJECTS = [
     name: "Demo Feature Questions",
     tagline: "Uncover pain-implicating questions to ask during feature demos",
     color: "#ec4899",
-    systemPrompt: `PASTE YOUR SYSTEM PROMPT HERE FROM YOUR CLAUDE PROJECT`
+    systemPrompt: `One thing AEs struggle with is continuing to ask questions throughout the demo to ensure the features being shown are actually solving pain for prospects.
+
+Your job is to read through transcripts of the AE team at Hook and pick out the best questions that AEs ask to get prospects to open up about their pains.
+
+When presenting questions:
+- Link them to specific features being demoed where possible
+- Group questions by the feature or area of the product they relate to
+- Highlight questions that consistently generated the strongest responses or got prospects talking
+- Keep each question concise and easy to remember mid-demo
+- Give brief context on why each question works and what pain it typically surfaces
+
+The goal is a ready reference of proven questions AEs can use mid-demo to continue implicating and growing pain as they show features.
+
+I will share transcripts for you to query.`
   },
   {
     id: "tech-check-email",
@@ -567,7 +684,17 @@ const PROJECTS = [
     name: "Tech Check Follow-Up Email",
     tagline: "Generate follow-up emails after a tech check using notes & transcript",
     color: "#14b8a6",
-    systemPrompt: `PASTE YOUR SYSTEM PROMPT HERE FROM YOUR CLAUDE PROJECT`
+    systemPrompt: `Ingest tech check summaries, transcripts and additional info to build a follow-up reply email to send to prospects who joined a tech check.
+
+The email should:
+- Open with an overall summary of how the tech check went
+- State clearly whether the prospect is a good fit for Echo ML, Echo AI, or both
+- Go into follow-up items and any additional questions the sales rep needs to ask back
+- Close with an "Additional Links" section containing a bullet point for "Technical Overview Pack"
+
+Keep it concise — not super long. Be accurate but do not be negative in a way that limits the sale. Frame everything constructively and keep the deal moving forward.
+
+Tone: Professional, helpful, forward-moving.`
   },
   {
     id: "roadmap",
@@ -575,7 +702,13 @@ const PROJECTS = [
     name: "Upcoming Roadmap Features",
     tagline: "Ask whether features are on the roadmap or already exist",
     color: "#eab308",
-    systemPrompt: `PASTE YOUR SYSTEM PROMPT HERE FROM YOUR CLAUDE PROJECT`
+    systemPrompt: `You are a Hook product knowledge assistant focused on roadmap and feature availability.
+
+This project is currently being set up with roadmap data. When asked about upcoming features, be honest that full roadmap details have not yet been loaded and advise checking with the product team for the most up-to-date information.
+
+Never speculate on timelines or commit to delivery dates for any feature.
+
+This project will be updated with roadmap documentation as it becomes available.`
   },
   {
     id: "pre-tech-check",
@@ -583,7 +716,36 @@ const PROJECTS = [
     name: "Pre Tech Check Internal Brief",
     tagline: "Create briefing packs for Engineering/TIC before tech checks",
     color: "#ef4444",
-    systemPrompt: `PASTE YOUR SYSTEM PROMPT HERE FROM YOUR CLAUDE PROJECT`
+    systemPrompt: `You create pre-tech check briefing documents for Hook's Engineering and TIC teams.
+
+A tech check is a call between a prospect's team and our Engineering/TIC team to map out the prospect's data sources and confirm they can be fed into Hook for our AI to learn from.
+
+Ingest transcripts, notes and any other context I provide, then output a briefing doc with the following sections:
+
+1. Company Name
+
+2. Echo AI, Echo ML, or Both?
+State clearly which product(s) they are being evaluated for.
+
+3. Known Tech Stack
+Bullet point list of where their data lives — CRM, CS platform, data warehouse, call recording tools, ticketing systems, etc. Only include what has been confirmed.
+
+4. Who Will Join the Meeting
+List any known attendees on the prospect side and their roles (e.g. data contacts, SFDC admin, CS team lead, Head of Engineering).
+
+5. What Are They Being Sold
+e.g. Echo, Churn detection, Upsell signals, Cross-sell, full platform. If upsell is involved, include detail on how they upsell and what they upsell on (e.g. license expansion, seat count).
+
+6. Are They Being Pitched Functionality We Don't Yet Have?
+Flag any features or capabilities that have been discussed that are not currently live. Be specific.
+
+7. Contract Size
+In USD if known.
+
+8. Additional Context
+Any other information that would help the Engineering/TIC team walk in prepared — known concerns, integration complexity, data quality issues raised, specific scenarios to prepare for.
+
+Keep the brief scannable. Engineering/TIC teams are busy — give them exactly what they need.`
   },
   {
     id: "ask-anything",
@@ -591,7 +753,21 @@ const PROJECTS = [
     name: "Ask Anything – Sales Edition",
     tagline: "Instant answers to questions that come up mid-sales call",
     color: "#6366f1",
-    systemPrompt: `PASTE YOUR SYSTEM PROMPT HERE FROM YOUR CLAUDE PROJECT`
+    systemPrompt: `AEs will use you to get instant answers to questions that come up on calls with prospects.
+
+Your job is to ingest the last 3 months of Gong transcripts and search for the most common and effective answers that Hook AEs use when questions arise on calls.
+
+When answering:
+- Give the most direct, usable answer first
+- Format answers so an AE can speak them naturally on a call — conversational, confident, not robotic
+- Include any relevant context or nuance after the main answer
+- If a question is about pricing, integrations, or product capability, be specific where possible
+- Clearly flag if something needs to be verified with the product or technical team before committing
+- Keep answers concise enough to be useful in the moment
+
+You cover: product questions, competitive objections, pricing and packaging, integration queries, implementation timelines, security and compliance, and any other questions that come up during the sales process.
+
+I will share Gong transcripts for you to learn from.`
   },
   {
     id: "discovery",
@@ -599,15 +775,27 @@ const PROJECTS = [
     name: "Discovery Flavour of the Month",
     tagline: "Creative discovery question inspiration from this month",
     color: "#10b981",
-    systemPrompt: `PASTE YOUR SYSTEM PROMPT HERE FROM YOUR CLAUDE PROJECT`
+    systemPrompt: `Using AE discovery, demo and prospect call transcripts from Hook — you will pull in transcripts and pick out the best discovery questions from Hook salespeople.
+
+For each question:
+- Include the question itself
+- Give the context behind why it was asked — what situation the AE was in, what they were trying to uncover
+- Note what pain or insight it typically surfaces
+
+Group questions by theme where helpful (e.g. churn, efficiency, expansion, exec alignment, tech stack, team structure).
+
+The goal is to give AEs fresh, proven angles for discovery — not the same questions every time. Surface the ones that actually made prospects open up.
+
+I will share transcripts for you to query. Add more transcripts over time and I will update my recommendations.`
   },
 ];
 // ═══════════════════════════════════════════════════════════════
 
 // State
 let currentProject = null;
-let messages = []; // { role, content } — content can be string or array (for images)
+let messages = []; // { role, content } — content can be string or array (for images/files)
 let pendingImages = []; // { base64, mediaType, name }
+let pendingTextFiles = []; // { name, content }
 
 // ── Render project grid ──
 function renderGrid() {
@@ -657,6 +845,7 @@ function goHome() {
 function clearChat() {
   messages = [];
   pendingImages = [];
+  pendingTextFiles = [];
   document.getElementById("image-preview-area").innerHTML = "";
   renderMessages();
 }
@@ -727,15 +916,19 @@ async function sendMessage() {
   const input = document.getElementById("chat-input");
   const text = input.value.trim();
 
-  if (!text && pendingImages.length === 0) return;
+  if (!text && pendingImages.length === 0 && pendingTextFiles.length === 0) return;
 
   const apiKey = localStorage.getItem("anthropic_api_key");
   if (!apiKey) { openApiModal(); return; }
 
   // Build content block
   let content;
-  if (pendingImages.length > 0) {
+  if (pendingImages.length > 0 || pendingTextFiles.length > 0) {
     content = [
+      ...pendingTextFiles.map(f => ({
+        type: "text",
+        text: `[File: ${f.name}]\n\`\`\`\n${f.content}\n\`\`\``
+      })),
       ...pendingImages.map(img => ({
         type: "image",
         source: { type: "base64", media_type: img.mediaType, data: img.base64 }
@@ -748,6 +941,7 @@ async function sendMessage() {
 
   messages.push({ role: "user", content });
   pendingImages = [];
+  pendingTextFiles = [];
   document.getElementById("image-preview-area").innerHTML = "";
 
   input.value = "";
@@ -780,7 +974,7 @@ async function sendMessage() {
       },
       body: JSON.stringify({
         model: "claude-opus-4-6",
-        max_tokens: 4096,
+        max_tokens: 8096,
         system: currentProject.systemPrompt,
         messages: messages
       })
@@ -823,23 +1017,32 @@ function handleFiles(e) {
   const area = document.getElementById("image-preview-area");
 
   files.forEach(file => {
-    if (!file.type.startsWith("image/")) return;
     const reader = new FileReader();
-    reader.onload = ev => {
-      const base64 = ev.target.result.split(",")[1];
-      const mediaType = file.type;
-      const idx = pendingImages.length;
-      pendingImages.push({ base64, mediaType, name: file.name });
-
-      const thumb = document.createElement("div");
-      thumb.className = "img-thumb";
-      thumb.id = "thumb-" + idx;
-      thumb.innerHTML = `
-        <img src="${ev.target.result}" />
-        <button onclick="removeImage(${idx})">✕</button>`;
-      area.appendChild(thumb);
-    };
-    reader.readAsDataURL(file);
+    if (file.type.startsWith("image/")) {
+      reader.onload = ev => {
+        const base64 = ev.target.result.split(",")[1];
+        const idx = pendingImages.length;
+        pendingImages.push({ base64, mediaType: file.type, name: file.name });
+        const thumb = document.createElement("div");
+        thumb.className = "img-thumb";
+        thumb.id = "thumb-img-" + idx;
+        thumb.innerHTML = `<img src="${ev.target.result}" /><button onclick="removeImage(${idx})">✕</button>`;
+        area.appendChild(thumb);
+      };
+      reader.readAsDataURL(file);
+    } else {
+      reader.onload = ev => {
+        const idx = pendingTextFiles.length;
+        pendingTextFiles.push({ name: file.name, content: ev.target.result });
+        const chip = document.createElement("div");
+        chip.className = "img-thumb";
+        chip.id = "thumb-txt-" + idx;
+        chip.style.cssText = "width:auto;height:auto;padding:.3rem .6rem;display:flex;align-items:center;gap:.4rem;background:var(--surface2);border:1px solid var(--border);border-radius:6px;font-size:.78rem;color:var(--muted)";
+        chip.innerHTML = `<span>📄 ${file.name}</span><button onclick="removeTextFile(${idx})" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;padding:0">✕</button>`;
+        area.appendChild(chip);
+      };
+      reader.readAsText(file);
+    }
   });
 
   e.target.value = "";
@@ -847,7 +1050,12 @@ function handleFiles(e) {
 
 function removeImage(idx) {
   pendingImages.splice(idx, 1);
-  document.getElementById("thumb-" + idx)?.remove();
+  document.getElementById("thumb-img-" + idx)?.remove();
+}
+
+function removeTextFile(idx) {
+  pendingTextFiles.splice(idx, 1);
+  document.getElementById("thumb-txt-" + idx)?.remove();
 }
 
 // ── API key modal ──
